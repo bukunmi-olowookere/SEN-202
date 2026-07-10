@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SIM — Security Incident Mapping (Dispatch View)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- SIDEBAR (branding only) -->
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="side-mark">SIM</span>
+      <span class="side-sub">Dispatch</span>
+    </div>
+    <p class="side-blurb">Report. Track. Stay safe. Anonymous reporting available.</p>
+    <div class="side-footer">
+      SEN202 Weekly Dev<br/>Client-side prototype
+    </div>
+  </aside>
+
+  <!-- MAIN: everything on one page -->
+  <main class="main">
+
+    <header class="main-top">
+      <div>
+        <h1>Incident Dashboard</h1>
+        <p class="sub">Submit a report below — it appears instantly in the feed.</p>
+      </div>
+    </header>
+
+    <section class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <span class="stat-num" id="statTotal">0</span>
+        <span class="stat-label">Total reports</span>
+      </div>
+      <div class="stat-card critical">
+        <span class="stat-num" id="statCritical">0</span>
+        <span class="stat-label">Critical</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="statPending">0</span>
+        <span class="stat-label">Pending review</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="statAnon">0</span>
+        <span class="stat-label">Anonymous</span>
+      </div>
+    </section>
+
+    <!-- REPORT FORM: inline, always visible -->
+    <section class="form-card">
+      <h2>Report a security incident</h2>
+      <form id="reportForm" novalidate>
+        <div class="form-row">
+          <label class="field">
+            <span>I am reporting as</span>
+            <select id="reporterType" required>
+              <option value="" disabled selected>Select role</option>
+              <option>Student / Villa-mate</option>
+              <option>Staff</option>
+              <option>Landlord / Property Manager</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Incident type</span>
+            <select id="incidentType" required>
+              <option value="" disabled selected>Select type</option>
+              <option data-severity="high">Stabbing / Assault</option>
+              <option data-severity="critical">Rape / Sexual assault</option>
+              <option data-severity="critical">Murder</option>
+              <option data-severity="medium">Theft / Stealing</option>
+              <option data-severity="medium">Burglary / Break-in</option>
+              <option data-severity="high">Cultism-related violence</option>
+              <option data-severity="low">Other</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Location</span>
+            <input id="location" type="text" placeholder="e.g. Behind Faculty of Science, Hostel B" required />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Description</span>
+          <textarea id="description" rows="2" placeholder="What happened? When?" required></textarea>
+        </label>
+
+        <div class="form-row form-row-tight">
+          <label class="checkbox-field">
+            <input id="anonymous" type="checkbox" />
+            <span>Report anonymously</span>
+          </label>
+
+          <div id="reporterIdBlock" class="field field-inline">
+            <input id="reporterId" type="text" placeholder="Optional name / matric no." />
+          </div>
+
+          <button type="submit" class="btn-submit">Submit report</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="feed-toolbar">
+      <h2>Reports feed</h2>
+      <select id="filterType">
+        <option value="all">All categories</option>
+        <option>Stabbing / Assault</option>
+        <option>Rape / Sexual assault</option>
+        <option>Murder</option>
+        <option>Theft / Stealing</option>
+        <option>Burglary / Break-in</option>
+        <option>Cultism-related violence</option>
+        <option>Other</option>
+      </select>
+    </section>
+
+    <section class="card-grid" id="cardGrid">
+      <!-- report cards injected here -->
+    </section>
+
+    <p id="emptyState" class="empty-state">No reports yet — submit the form above to add one.</p>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
